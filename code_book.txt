@@ -6,29 +6,40 @@ Version 1.0
 Brandon Shelton
 ==================================================================
 
-The 'project_analysis.R' script takes several unique component data sets of a Samsung activity experiment and organizes the information into a single dataset that calculates the average values of a number of variables by (1) the type of activity the subject performed and (2) the unique ID of the subject.
-
+OVERVIEW:
+The 'project_analysis.R' script takes several unique component data sets of a Samsung activity experiment and organizes the information into a single dataset that calculates the average values of a number of measurement variables by (1) the type of activity the subject performed and (2) the unique ID of the subject.
 The tidy data set produced with the 'project_anaysis.R' script was first sorted by 'activity' and then sorted by 'subject'. It was sorted by 'activity' first because it would be more meaningul to compare the means of like-activities against each other for the different subjects, rather than comparing the different activities against each other for each unique subject.
-
 The instructions asked that we only include the mean and standard deviation variables for analysis. There were variables that measure mean frequency, but they were intentionally removed them from scope, as they were not explicitly required for the project.
 
+PROCESS:
+1. I downloaded the required zip file then,
+2. Unzipped the contents into my working directory then,
+3. row-merged together the test and train features measurements data sets then,
+4. Identified which ones were mean and standard deviation measurements and removed the fields that were not. I also removed the 'meanFreq' measurements as they were not explicitly called for in the project instructions then,
+5. Renamed the numeric field names of the features measurements to reflect their actual measurement names then,
+6. Row-merged togther the test and train numeric activity IDs then,
+7. Associated the numeric activity IDs with their actual activity names then,
+8. Column-merged the activity names with the measurements variable data set then,
+9. Row-merged together the test and train subject IDs then,
+10. Column-merged the subject IDs with the activity ID and measurement variable data then,
+11. Computed the averages of the measurement variables by activity and subject IDs then,
+12. Sorted the measurement averages by activity and then subject ID then,
+13. Created the tidy data set into a text file.
 
 
+
+
+FINAL DATA DESCRIPTIONS:
 
 The column descriptions of the data set are as follows:
 
-1. 'activity':	6 different activities were monitored with the experiment: WALKING
-, WALKING_UPSTAIRS
-, WALKING_DOWNSTAIRS
-, SITTING, STANDING
-, LAYING
+1. 'activity':	6 different activities were monitored with the experiment: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
 
 2. 'subject':	The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The subject had originally been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. For purposes of the course project analysis, all training and test data was combined into a single data set, per the instructions.
 3. through 68.:	The mean and standard deviation averages (by activity and subject) of the feature variables selected for the study. The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
-
 Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
-
 Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+Features are normalized and bounded within [-1,1].
 
 These signals were used to estimate variables of the feature vector for each pattern:  
 '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
@@ -50,5 +61,3 @@ fBodyAccMag
 fBodyAccJerkMag
 fBodyGyroMag
 fBodyGyroJerkMag
-
-
