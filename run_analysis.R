@@ -7,8 +7,8 @@ xtrain <- read.table("./data/UCI HAR Dataset/train/X_train.txt")#read in the x_t
 xbind <- rbind(xtest,xtrain)                                    #merge the x_test and x_train files together
 features <- read.table("./data/UCI HAR Dataset/features.txt")   #read in the features file to R
 feat_rem <- gsub("[[:punct:]]", "", features$V2)                #remove punctuations from column V2
-features2 <- data.frame(features$V1,feat_rem)
-colnames(features2) <- c("V1","V2")
+features2 <- data.frame(features$V1,feat_rem)                   #combines the original numeric id column of the features data with the new name column, which is removed of punctuations
+colnames(features2) <- c("V1","V2")                             #changes the names of the features2 dataset to "V1" and "V2"
 keep_features <- ifelse(grepl("meanFreq",features2$V2), "discard", ifelse(grepl("(mean)|(std)", features2$V2), "keep", "discard")) #returns "keep" for those variables that are means and standard deviations and returns "discard" for all else
 feature_ID <- rbind(keep_features,xbind)                        #includes a row to xbind that tells me whether or not the column is a mean or standard deviation measurement
 keep_features1 <- feature_ID[,c(feature_ID[1,]=="keep")]         #removes columns that do not measure either the mean or standard deviation
@@ -29,9 +29,9 @@ library(data.table)                                             #loads the packa
 setnames(activity_id, "descr$activity", "activity")             #changes the name of "descr$activity" to "activity"
 subject_test <- read.table("./data/UCI HAR Dataset/test/subject_test.txt")#read in the subject_test file to R
 subject_train <- read.table("./data/UCI HAR Dataset/train/subject_train.txt")#read in the subject_train file to R
-subjectbind <- rbind(subject_test,subject_train)
-colnames(subjectbind) <- c("subject")
-final_bind <- cbind(subjectbind,activity_id)
-averages <- aggregate( . ~ activity + subject , data = final_bind , FUN = mean )
-tidy <- averages[order(averages$activity,averages$subject),]
-write.table(tidy, "./data/Tidy_Data_Set.txt", sep="\t", row.name=FALSE)
+subjectbind <- rbind(subject_test,subject_train)                #combines the subject data from both the test and train data sets
+colnames(subjectbind) <- c("subject")                           #changes the name of the 'subjectbind' data column to 'subject'
+final_bind <- cbind(subjectbind,activity_id)                    #adds the 'subject' column to the beginning of the activity dataset 
+averages <- aggregate( . ~ activity + subject , data = final_bind , FUN = mean )        #creates an average for each column variable, by activity and by subject
+tidy <- averages[order(averages$activity,averages$subject),]    #sorts the 'averages' data by 'activity' and then 'subject'
+write.table(tidy, "./data/Tidy_Data_Set.txt", sep="\t", row.name=FALSE) #writes a .txt file of the 'tidy' data set
