@@ -31,6 +31,6 @@ The 'run_analysis.R' script performs the following functions in the following or
 27. Merges the 'subjectbind' data set with the 'activity_id' data set, by columns, into a new data set names 'final_bind'.
 28. Computes the averages of measurement description variable columns from the 'final_bind' data set by the 'activity' and 'subject' columns in a new data set titled 'averages'.
 29. Creates a new data set, titled 'tidy', that sorts the 'averages' data set by the 'activity' column descending order, and then by the 'subject' column descending order.
-30. Writes the 'tidy' data set into a .txt file and places it in the "./data" folder of the working director.
+30. Writes the 'tidy' data set into a .txt file and places it in the "./data" folder of the working directory.
 
 END PROGRAM
