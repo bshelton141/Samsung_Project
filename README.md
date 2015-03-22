@@ -16,7 +16,7 @@ The 'run_analysis.R' script performs the following functions in the following or
 12. Merges the 'keep_features' data set and 'xbind' data set together, titled 'feature_ID'.
 13. Creates a new data set, titled 'keep_features1', that only includes the columns containing "keep" in the first row of the 'feature_ID' data set.
 14. Removes the first row from the 'keep_features1' data set that was used to identify which columns to keep, in a new data set titled 'keep_features2'.
-15. Changes all values in 'keep_features2' data set from character to numeric.
+15. Changes all values in 'keep_features2' data set from character values to numeric values.
 16. Changes the column headers of the data set to be the measurement description variable names.
 17. Reads the 'Y_test.txt' data into R.
 18. Reads the 'Y_train.txt' data into R.
